@@ -10,6 +10,12 @@ Instruction-only skill that mirrors Claude Code's AskUserQuestion: when a task i
 2) Or package it: `scripts/package_skill.py ask-user-question` (if you have the Codex skill tools repo on PATH).
 3) Restart your Codex client if needed.
 
+## Create/Install via Codex tooling
+- With skill-creator:  
+  `python3 ~/.codex/skills/.system/skill-creator/scripts/init_skill.py ask-user-question --path ~/.codex/skills`  
+  Then replace the generated `SKILL.md` with the one in this repo (or copy this whole folder into place).
+- With skill-installer (if available): point it at this repo path so it copies `ask-user-question/` into your skills directory; then restart your Codex client. (Exact command depends on your setup; the installer expects a skills folder path or Git URL.)
+
 ## Trigger Cues
 - Auto: any ambiguous/missing requirement task or preference-driven choice.
 - Explicit cues: "ask user questions", "clarify first", "ask back", "double-check preferences", "interview me".
