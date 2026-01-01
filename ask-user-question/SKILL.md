@@ -1,6 +1,6 @@
 ---
 name: ask-user-question
-description: "Interactive clarification helper that restates the current understanding, asks 1-5 targeted questions (multi-choice with Other) when requirements are missing, ambiguous, or preference-driven, then outputs normalized user_answers JSON and proceeds. Auto-trigger on unclear or multi-interpretation tasks or when explicitly told to 'kérdezz vissza', 'tisztázd', 'interjúzz meg', or similar requests to interview/clarify."
+description: "Interactive clarification helper that restates the current understanding, asks 1-5 targeted questions (multi-choice with Other) when requirements are missing, ambiguous, or preference-driven, then outputs normalized user_answers JSON and proceeds. Auto-trigger on unclear or multi-interpretation tasks or when explicitly told to 'ask back', 'clarify', 'interview me', or similar requests to interview/clarify."
 ---
 
 # Ask User Question
@@ -10,7 +10,7 @@ General-purpose interview flow that pauses to gather the minimum answers needed 
 ## When to Trigger
 - Ambiguity: multiple plausible interpretations, missing requirements, or blocked choices (e.g., platform, scope, format, priority).
 - Preference or constraints needed: style, budget/time limits, risk tolerance, stack choice, access limits.
-- Explicit cues: "kérdezz vissza", "tisztázd", "interjúzz meg", "ask user questions", "clarify first", "interview me".
+- Explicit cues: "ask back", "clarify", "double-check preferences", "ask user questions", "clarify first", "interview me".
 
 ## Core Workflow (follow in order)
 1) **Restate (Step A):** Summarize current understanding in 2-4 sentences and say why clarification is needed.
@@ -42,25 +42,25 @@ General-purpose interview flow that pauses to gather the minimum answers needed 
 - If the user declines to choose, pick a safe default and note it in the JSON.
 - Keep the JSON stable and normalized even when partial; fill unknowns with clear placeholders like `"unknown"` rather than omitting keys.
 
-## Hungarian Usage Examples
-- "Kérlek, mielőtt nekilátsz, kérdezz vissza a hiányzó részletekre."
-- "Ez többféleképp is érthető, tisztázd a preferenciáimat."
-- "Interjúzz meg röviden, hogy tudd, mit szeretnék pontosan."
+## Usage Examples
+- "Before you start, please ask follow-up questions for the missing details."
+- "This could be understood in different ways—clarify my preferences."
+- "Interview me briefly so you know exactly what I want."
 
 ## Test Scenarios (for self-check)
-1) **Feature ambiguity:** User: "Kell egy mobil app a futásaimhoz."  
+1) **Feature ambiguity:** User: "I need a mobile app for my runs."  
    - Sample questions: platform (iOS/Android/both/Other), core goal (tracking/coach/share/Other), data sources (watch/phone/manual/Other).  
    - Expected JSON (example answers):  
      ```json
      {"user_answers":{"platform":"android","goal":"tracking","data_source":"watch","constraints":{"time":"unknown","budget":"unknown","platform":"android"},"preferences":{"style":"unknown","risk":"unknown"}}}
      ```
-2) **Preference choice:** User: "Írj CI pipeline-t Node projekthez."  
+2) **Preference choice:** User: "Write a CI pipeline for a Node project."  
    - Sample questions: CI provider (GitHub Actions/GitLab/Other), test scope (unit/unit+lint/full/Other), caching (yes/no/Other).  
    - Expected JSON (example answers):  
      ```json
      {"user_answers":{"ci_provider":"github_actions","test_scope":"unit+lint","caching":"yes","constraints":{"time":"unknown","budget":"unknown","platform":"unknown"},"preferences":{"style":"unknown","risk":"conservative"}}}
      ```
-3) **Explicit cue:** User: "Kérdezz vissza: új landing page, modern vagy retro?"  
+3) **Explicit cue:** User: "Ask back: new landing page—modern or retro?"  
    - Sample questions: style (modern/retro/minimal/Other), launch deadline (1w/2-4w/6+w/Other), copy language (EN/HU/bilingual/Other).  
    - Expected JSON (example answers):  
      ```json

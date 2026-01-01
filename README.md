@@ -12,7 +12,7 @@ Instruction-only skill that mirrors Claude Code's AskUserQuestion: when a task i
 
 ## Trigger Cues
 - Auto: any ambiguous/missing requirement task or preference-driven choice.
-- Explicit cues (also Hungarian): "ask user questions", "clarify first", "kérdezz vissza", "tisztázd", "interjúzz meg".
+- Explicit cues: "ask user questions", "clarify first", "ask back", "double-check preferences", "interview me".
 
 ## Example Prompt
-"Kérdezz vissza: kell egy mobil app a futásaimhoz." → The agent should summarize, ask 1–5 relevant multiple-choice questions with `Other`, pause, output `user_answers` JSON, then proceed using those answers.
+"Ask back: I need a mobile app for my runs." → The agent should summarize, ask 1–5 relevant multiple-choice questions with `Other`, pause, output `user_answers` JSON, then proceed using those answers.
